@@ -6,7 +6,7 @@ from restaurant import Restaurant, Category, Meal
 def restaurant_from_bs4(bs: BeautifulSoup) -> Restaurant:
     restaurant_name = bs.h1.a.text
     restaurant_addr = bs.p.text
-    restaurant_div = bs.find(class_='restaurant')
+    bs.find(class_='restaurant')
     menu = bs.find(class_='restaurant-menu')
     cat_list = parse_menu(menu)
     return Restaurant(0, restaurant_name, restaurant_addr, cat_list)
