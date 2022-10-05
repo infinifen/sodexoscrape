@@ -1,3 +1,5 @@
+import sys
+
 import requests
 from bs4 import BeautifulSoup
 from rich import print
@@ -23,8 +25,8 @@ def build_restaurant_tree(r: Restaurant) -> Tree:
     return tree
 
 
-def main():
-    res = get_restaurant_html(36)
+def main(restaurant_id: int):
+    res = get_restaurant_html(restaurant_id)
     bs = BeautifulSoup(res.text, features="lxml")
     restaurant = restaurant_from_bs4(bs)
     tree = build_restaurant_tree(restaurant)
@@ -32,4 +34,14 @@ def main():
 
 
 if __name__ == '__main__':
-    main()
+    if len(sys.argv) < 2:
+        print("error: no restaurant id provided", file=sys.stderr)
+        exit(1)
+    else:
+        try:
+            rid = int(sys.argv[1])
+        except ValueError:
+            print("error: restaurant id is not an integer", file=sys.stderr)
+            exit(1)
+        else:
+            main(rid)
