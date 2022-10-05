@@ -10,7 +10,7 @@ def get_restaurant_html(restaurant_id: int):
 
 def main():
     res = get_restaurant_html(36)
-    bs = BeautifulSoup(res.text)
+    bs = BeautifulSoup(res.text, features="lxml")
     print(bs)
 
 
