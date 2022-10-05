@@ -1,5 +1,6 @@
 import requests
 from bs4 import BeautifulSoup
+from rich import print
 
 from scrape import restaurant_from_bs4
 
