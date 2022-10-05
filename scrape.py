@@ -20,7 +20,8 @@ def parse_menu(menu: BeautifulSoup) -> list[Category]:
         match tag.name:
             case 'h2':
                 if current_cat is not None:  # no previous category ever existed
-                    current_cat.meals.append(current_meal)  # add last meal
+                    current_cat.meals.append(current_meal)  # add last meal in category
+                    current_meal = None
                     cat_list.append(current_cat)
 
                 current_cat = Category(name=tag.text)
@@ -37,5 +38,6 @@ def parse_menu(menu: BeautifulSoup) -> list[Category]:
             case 'p':
                 current_meal.kind = tag.text
 
+    current_cat.meals.append(current_meal)  # add last meal
     cat_list.append(current_cat)  # add last category
     return cat_list
