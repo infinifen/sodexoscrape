@@ -15,6 +15,9 @@ class Category:
     name: str = ''
     meals: list[Meal] = field(default_factory=list)
 
+    def __iter__(self):
+        return self.meals.__iter__()
+
 
 @dataclass(init=True, repr=True)
 class Restaurant:
@@ -22,3 +25,6 @@ class Restaurant:
     name: str
     address: str
     categories: list[Category]
+
+    def __iter__(self):
+        return self.categories.__iter__()
