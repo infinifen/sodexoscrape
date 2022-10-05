@@ -16,7 +16,7 @@ def get_restaurant_html(restaurant_id: int):
 
 
 def build_restaurant_tree(r: Restaurant) -> Tree:
-    tree = Tree(r.name, style="bold")
+    tree = Tree(f'[b]{r.name}[/] [bright_black]{r.address}[/]')
     for cat in r:
         cat_subtree = tree.add(cat.name, style="not bold green")
         for meal in cat:
