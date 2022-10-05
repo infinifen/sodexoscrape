@@ -1,6 +1,7 @@
 import requests
 from bs4 import BeautifulSoup
 
+
 def get_restaurant_html(restaurant_id: int):
     url = f'https://enjoyyourmeal.pl/menu/restaurant/id/{restaurant_id}'
     print(url)
@@ -10,7 +11,7 @@ def get_restaurant_html(restaurant_id: int):
 
 def main():
     res = get_restaurant_html(36)
-    bs = BeautifulSoup(res.text)
+    bs = BeautifulSoup(res.text, features="lxml")
     print(bs)
 
 
