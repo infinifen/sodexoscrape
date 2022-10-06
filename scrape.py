@@ -6,7 +6,7 @@ from restaurant import Restaurant, Category, Meal
 def restaurant_from_bs4(bs: BeautifulSoup) -> Restaurant:
     restaurant_name = bs.h1.a.text
     restaurant_addr = bs.p.text
-    restaurant_div = bs.find(class_='restaurant')
+    bs.find(class_='restaurant')
     menu = bs.find(class_='restaurant-menu')
     cat_list = parse_menu(menu)
     return Restaurant(0, restaurant_name, restaurant_addr, cat_list)
@@ -20,6 +20,8 @@ def parse_menu(menu: BeautifulSoup) -> list[Category]:
         match tag.name:
             case 'h2':
                 if current_cat is not None:  # no previous category ever existed
+                    current_cat.meals.append(current_meal)  # add last meal in category
+                    current_meal = None
                     cat_list.append(current_cat)
 
                 current_cat = Category(name=tag.text)
@@ -36,4 +38,6 @@ def parse_menu(menu: BeautifulSoup) -> list[Category]:
             case 'p':
                 current_meal.kind = tag.text
 
+    current_cat.meals.append(current_meal)  # add last meal
+    cat_list.append(current_cat)  # add last category
     return cat_list
