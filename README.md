@@ -1,6 +1,6 @@
 # sodexoscrape
 
-Simple python scraper for Sodexo's https://enjoyourmeal.pl restaurants
+Simple python scraper for Sodexo's https://enjoyyourmeal.pl restaurants
 
 
 ## Usage
